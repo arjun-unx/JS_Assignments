@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Functions Demo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #2575fc;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2575fc;
+            color: #fff;
+        }
+
+        .result {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Async Functions Demo</h1>
+    <button onclick="runCallback()">Run Callback</button>
+    <button onclick="runPromise()">Run Promise</button>
+    <button onclick="runAsyncAwait()">Run Async/Await</button>
+
+    <div class="result" id="callbackResult">Callback Result: </div>
+    <div class="result" id="promiseResult">Promise Result: </div>
+    <div class="result" id="asyncAwaitResult">Async/Await Result: </div>
+
+    <script>
+        // Function using callbacks
+        function getDataWithCallback(callback) {
+            setTimeout(() => {
+                callback("Data from callback");
+            }, 3000);
+        }
+
+        function runCallback() {
+            getDataWithCallback(result => {
+                document.getElementById('callbackResult').innerText = "Callback Result: " + result;
+            });
+        }
+
+        // Function using promises
+        function getDataWithPromise() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve("Data from promise");
+                }, 3000);
+            });
+        }
+
+        function runPromise() {
+            getDataWithPromise().then(result => {
+                document.getElementById('promiseResult').innerText = "Promise Result: " + result;
+            });
+        }
+
+        // Function using async/await
+        async function getDataWithAsyncAwait() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve("Data from async/await");
+                }, 3000);
+            });
+        }
+
+        async function runAsyncAwait() {
+            const result = await getDataWithAsyncAwait();
+            document.getElementById('asyncAwaitResult').innerText = "Async/Await Result: " + result;
+        }
+    </script>
+</body>
+
+</html>
